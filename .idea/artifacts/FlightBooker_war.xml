@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="FlightBooker:war">
-    <output-path>$PROJECT_DIR$/target</output-path>
-    <root id="archive" name="flight-booker.war">
-      <element id="artifact" artifact-name="FlightBooker:war exploded" />
-    </root>
-  </artifact>
-</component>
