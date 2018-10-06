@@ -54,4 +54,10 @@ public class AirportDAOImpl implements AirportDAO {
         currentSession.delete(airport);
 
     }
+
+    @Override
+    public Airport getById(int id) {
+        Airport airport = (Airport)sessionFactory.getCurrentSession().load(Airport.class, id);
+        return airport;
+    }
 }

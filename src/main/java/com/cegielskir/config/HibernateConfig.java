@@ -9,6 +9,7 @@ import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import org.apache.commons.dbcp2.BasicDataSource;
@@ -24,7 +25,8 @@ import static org.hibernate.cfg.Environment.*;
 @PropertySource("classpath:db.properties")
 @EnableTransactionManagement
 @ComponentScans(value = { @ComponentScan("com.cegielskir.dao"),
-        @ComponentScan("com.cegielskir.service") })
+        @ComponentScan("com.cegielskir.service"),
+        @ComponentScan("com.cegielskir.propertyEditor")})
 public class HibernateConfig {
 
     @Autowired

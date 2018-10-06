@@ -10,4 +10,5 @@ public interface AirportDAO {
     List<Airport> getList();
     List<String> getCountryList();
     void delete(int id);
+    Airport getById(int id);
 }

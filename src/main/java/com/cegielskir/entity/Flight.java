@@ -52,7 +52,7 @@ public class Flight {
     @Column(name="cancelled")
     private boolean cancelled;
 
-    @OneToOne(cascade = CascadeType.REFRESH)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name="flight_details_id")
     private FlightDetails flightDetails;
 
@@ -68,7 +68,6 @@ public class Flight {
         this.fromAirport = fromAirport;
         this.toAirport = toAirport;
         this.cancelled = false;
-        this.flightDetails = null;
     }
 
     public int getId() {
@@ -131,7 +130,7 @@ public class Flight {
         return toAirport;
     }
 
-    public void setToAirportId(Airport toAirport) {
+    public void setToAirport(Airport toAirport) {
         this.toAirport = toAirport;
     }
 

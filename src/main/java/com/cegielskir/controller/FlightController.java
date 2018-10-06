@@ -2,6 +2,7 @@ package com.cegielskir.controller;
 
 import com.cegielskir.entity.Airport;
 import com.cegielskir.entity.Flight;
+import com.cegielskir.propertyEditor.AirportEditor;
 import com.cegielskir.service.AirportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -27,6 +28,9 @@ public class FlightController {
 
     @Autowired
     AirportService airportService;
+
+    @Autowired
+    AirportEditor airportEditor;
 
     @GetMapping("/list")
     public String getFlights(Model model){
@@ -55,6 +59,7 @@ public class FlightController {
     public String saveFlight(@Valid @ModelAttribute("flight") Flight flight,
                                BindingResult bindingResult){
         if(bindingResult.hasErrors()){
+            System.out.println("BINDING: " + bindingResult);
             return "flight-form";
         } else {
             flightService.add(flight);
@@ -72,7 +77,10 @@ public class FlightController {
                 new CustomDateEditor(new SimpleDateFormat("hh:mm"), false, 5));
         binder.registerCustomEditor(       Date.class,"arrivalTime",
                 new CustomDateEditor(new SimpleDateFormat("hh:mm"), false, 5));
+        binder.registerCustomEditor(Airport.class, this.airportEditor);
     }
+
+
 
 
 

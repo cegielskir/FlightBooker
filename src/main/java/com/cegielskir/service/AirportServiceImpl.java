@@ -38,4 +38,10 @@ public class AirportServiceImpl implements AirportService {
     public void delete(int id) {
         airportDAO.delete(id);
     }
+
+    @Transactional
+    @Override
+    public Airport getById(int id) {
+        return airportDAO.getById(id);
+    }
 }
