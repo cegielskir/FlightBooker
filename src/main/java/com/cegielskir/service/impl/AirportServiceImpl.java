@@ -1,8 +1,9 @@
-package com.cegielskir.service;
+package com.cegielskir.service.impl;
 
 import com.cegielskir.dao.AirportDAO;
 import com.cegielskir.dao.FlightDAO;
 import com.cegielskir.entity.Airport;
+import com.cegielskir.service.AirportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

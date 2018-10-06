@@ -1,5 +1,6 @@
-package com.cegielskir.dao;
+package com.cegielskir.dao.impl;
 
+import com.cegielskir.dao.AirportDAO;
 import com.cegielskir.entity.Airport;
 import com.cegielskir.entity.Flight;
 import org.hibernate.Session;
@@ -19,7 +20,7 @@ public class AirportDAOImpl implements AirportDAO {
 
     @Override
     public void add(Airport airport) {
-        sessionFactory.getCurrentSession().save(airport);
+        sessionFactory.getCurrentSession().saveOrUpdate(airport);
 
     }
 

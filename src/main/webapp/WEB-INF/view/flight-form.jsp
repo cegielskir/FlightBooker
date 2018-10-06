@@ -61,7 +61,7 @@
 
                 <form:select  path="fromAirport">
 
-                    <form:options items="${airports}" itemValue="id"/>
+                    <form:options items="${airports}"  itemValue="id"/>
 
                 </form:select>
 
@@ -72,7 +72,7 @@
 
                 <form:select  path="toAirport">
 
-                    <form:options items="${airports}" itemValue="id"/>
+                    <form:options items="${airports}"  itemValue="id"/>
 
                 </form:select>
 

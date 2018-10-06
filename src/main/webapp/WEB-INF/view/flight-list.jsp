@@ -38,13 +38,13 @@
                 <%--@elvariable id="flights" type="java.util.List"--%>
                 <c:forEach var="tempFlight" items="${flights}">
 
-                    <%--<c:url var="updateLink" value="/customer/showFormForUpdate">--%>
-                        <%--<c:param name="customerId" value="${tempCustomer.id}" />--%>
-                    <%--</c:url>--%>
+                    <c:url var="updateLink" value="/flight/showFormForUpdate">
+                        <c:param name="flightId" value="${tempFlight.id}" />
+                    </c:url>
 
-                    <%--<c:url var="deleteLink" value="/customer/delete">--%>
-                        <%--<c:param name="customerId" value="${tempCustomer.id}" />--%>
-                    <%--</c:url>--%>
+                    <c:url var="deleteLink" value="/flight/deleteFlight">
+                        <c:param name="flightId" value="${tempFlight.id}" />
+                    </c:url>
                     <tr>
                         <td> ${tempFlight.name} </td>
                         <td> ${tempFlight.departureTime} </td>
@@ -52,12 +52,13 @@
                         <td> ${tempFlight.arrivalTime} </td>
                         <td> ${tempFlight.arrivalDate} </td>
 
-                        <%--<td>--%>
-                            <%--<a href="${updateLink}">Update</a>--%>
-                            <%--|--%>
-                            <%--<a href="${deleteLink}"--%>
-                               <%--onclick="if (!(confirm('Are you sure you want to delete this customer?'))) return false;">Delete</a>--%>
-                        <%--</td>--%>
+                        <td>
+                            <a href="${updateLink}">Update</a>
+                            |
+                            <a href="${deleteLink}"
+                               onclick="if (!(confirm('Are you sure you want to delete this flight?')))
+                                   return false;">Delete</a>
+                        </td>
                     </tr>
                 </c:forEach>
             </table>

@@ -1,7 +1,8 @@
-package com.cegielskir.service;
+package com.cegielskir.service.impl;
 
 import com.cegielskir.dao.FlightDAO;
 import com.cegielskir.entity.Flight;
+import com.cegielskir.service.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,5 +25,17 @@ public class FlightServiceImpl implements FlightService {
     @Override
     public List<Flight> getList() {
         return flightDAO.getList();
+    }
+
+    @Transactional
+    @Override
+    public Flight getById(int id) {
+        return flightDAO.getById(id);
+    }
+
+    @Transactional
+    @Override
+    public void deleteById(int id) {
+        flightDAO.deleteById(id);
     }
 }

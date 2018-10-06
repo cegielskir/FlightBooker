@@ -8,4 +8,6 @@ public interface FlightDAO {
 
     void add(Flight flight);
     List<Flight> getList();
+    Flight getById(int id);
+    void deleteById(int id);
 }

@@ -67,6 +67,28 @@ public class FlightController {
         }
     }
 
+    @GetMapping("/showFormForUpdate")
+    public String updateFlight(@RequestParam("flightId") int id, Model model){
+
+        Flight flight = flightService.getById(id);
+        List<Airport> airports = airportService.getList();
+
+
+        model.addAttribute("airports", airports);
+        model.addAttribute("flight", flight);
+        System.out.println(flight);
+
+        return "flight-form";
+    }
+
+    @GetMapping("/deleteFlight")
+    public String deleteFlight(@RequestParam("flightId") int id, Model model){
+
+        flightService.deleteById(id);
+
+        return "redirect:/flight/list";
+    }
+
     @InitBinder
     public void initBinder(WebDataBinder binder){
         binder.registerCustomEditor(       Date.class, "departureDate",

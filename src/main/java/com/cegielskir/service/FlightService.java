@@ -8,4 +8,6 @@ public interface FlightService {
 
     void add(Flight Flight);
     List<Flight> getList();
+    Flight getById(int id);
+    void deleteById(int id);
 }
