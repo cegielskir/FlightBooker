@@ -15,13 +15,18 @@ public class FlightDetails {
     @JoinColumn(name = "plane_id")
     private Plane plane;
 
+    @OneToOne
+    @JoinColumn(name = "flight_id")
+    private Flight flight;
+
+    @Column
     private boolean cancelled;
 
     public FlightDetails() {}
 
-    public FlightDetails(int id, Plane plane, boolean cancelled) {
-        this.id = id;
+    public FlightDetails(Plane plane, Flight flight, boolean cancelled) {
         this.plane = plane;
+        this.flight = flight;
         this.cancelled = cancelled;
     }
 
@@ -49,11 +54,20 @@ public class FlightDetails {
         this.cancelled = cancelled;
     }
 
+    public Flight getFlight() {
+        return flight;
+    }
+
+    public void setFlight(Flight flight) {
+        this.flight = flight;
+    }
+
     @Override
     public String toString() {
         return "FlightDetails{" +
                 "id=" + id +
                 ", plane=" + plane +
+                ", flight=" + flight +
                 ", cancelled=" + cancelled +
                 '}';
     }

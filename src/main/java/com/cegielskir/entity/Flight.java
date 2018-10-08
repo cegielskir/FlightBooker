@@ -52,9 +52,6 @@ public class Flight {
     @Column(name="cancelled")
     private boolean cancelled;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="flight_details_id")
-    private FlightDetails flightDetails;
 
     public Flight() {}
 
@@ -142,13 +139,6 @@ public class Flight {
         this.cancelled = cancelled;
     }
 
-    public FlightDetails getFlightDetails() {
-        return flightDetails;
-    }
-
-    public void setFlightDetails(FlightDetails flightDetails) {
-        this.flightDetails = flightDetails;
-    }
 
     @Override
     public String toString() {
@@ -162,7 +152,6 @@ public class Flight {
                 ", fromAirport=" + fromAirport +
                 ", toAirport=" + toAirport +
                 ", cancelled=" + cancelled +
-                ", flightDetails=" + flightDetails +
                 '}';
     }
 }
