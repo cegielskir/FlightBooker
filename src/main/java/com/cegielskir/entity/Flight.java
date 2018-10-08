@@ -3,9 +3,13 @@ package com.cegielskir.entity;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 
 import java.util.Date;
+import java.util.Random;
 
 
 @Entity
@@ -17,6 +21,8 @@ public class Flight {
     @Column(name = "id")
     private int id;
 
+    @NotNull
+    @Size(min = 6, max = 10, message = "Length muse be between 6 and 10")
     @Column(name="name")
     private String name;
 
@@ -25,7 +31,6 @@ public class Flight {
     @Column(name="departure_time")
     private Date departureTime;
 
-    //@DateTimeFormat(pattern="dd-MM-yyyy")
     @Temporal(TemporalType.DATE)
     @Column(name="departure_date")
     private Date departureDate;
@@ -36,15 +41,17 @@ public class Flight {
     @Column(name="arrival_time")
     private Date arrivalTime;
 
-    //@DateTimeFormat(pattern="dd-MM-yyyy")
+
     @Temporal(TemporalType.DATE)
     @Column(name="arrival_date")
     private Date arrivalDate;
 
+    @NotNull(message = "Please choose source airport")
     @OneToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name="from_airport_id")
     private Airport fromAirport;
 
+    @NotNull(message = "Please choose destination airport")
     @OneToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name="to_airport_id")
     private Airport toAirport;

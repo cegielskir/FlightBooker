@@ -57,9 +57,11 @@ public class FlightController {
 
     @PostMapping("/saveFlight")
     public String saveFlight(@Valid @ModelAttribute("flight") Flight flight,
-                               BindingResult bindingResult){
+                               BindingResult bindingResult, Model model){
         if(bindingResult.hasErrors()){
             System.out.println("BINDING: " + bindingResult);
+            List<Airport> airports = airportService.getList();
+            model.addAttribute("airports", airports);
             return "flight-form";
         } else {
             flightService.add(flight);

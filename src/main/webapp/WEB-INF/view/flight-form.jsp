@@ -5,6 +5,9 @@
 
 <head>
     <title>Save Flight</title>
+    <style>
+        .error {color:red}
+    </style>
 
 </head>
 
@@ -29,30 +32,31 @@
                 <tr>
                     <td><label>Name:</label></td>
                     <td><form:input path="name" /></td>
+                    <td><form:errors path="name" cssClass="error" /></td>
                 </tr>
 
                 <tr>
                     <td><label>Departure Time:</label></td>
                     <td><form:input path="departureTime" /></td>
-                    <form:errors path="departureTime" cssClass="error" />
+                    <td><form:errors path="departureTime" cssClass="error" /></td>
                 </tr>
 
                 <tr>
                     <td><label>Departure Date:</label></td>
                     <td><form:input path="departureDate" /></td>
-                    <form:errors path="departureDate" cssClass="error" />
+                    <td><form:errors path="departureDate" cssClass="error" /></td>
                 </tr>
 
                 <tr>
                     <td><label>Arrival Time:</label></td>
                     <td><form:input path="arrivalTime" /></td>
-                    <form:errors path="arrivalTime" cssClass="error" />
+                    <td><form:errors path="arrivalTime" cssClass="error" /></td>
                 </tr>
 
                 <tr>
                     <td><label>Arrival Date:</label></td>
                     <td><form:input path="arrivalDate" /></td>
-                    <form:errors path="arrivalDate" cssClass="error" />
+                    <td><form:errors path="arrivalDate" cssClass="error" /></td>
                 </tr>
 
                 <br>
@@ -76,11 +80,6 @@
 
                 </form:select>
 
-                <br>
-
-                <form:errors path="name" />
-
-                <tr>
                     <td><label></label></td>
                     <td><input type="submit" value="Save" class="save" /></td>
                 </tr>
