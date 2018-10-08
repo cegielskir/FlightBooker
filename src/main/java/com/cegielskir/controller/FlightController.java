@@ -76,7 +76,6 @@ public class FlightController {
 
         model.addAttribute("airports", airports);
         model.addAttribute("flight", flight);
-        System.out.println(flight);
 
         return "flight-form";
     }

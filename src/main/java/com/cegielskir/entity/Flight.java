@@ -52,7 +52,7 @@ public class Flight {
     @Column(name="cancelled")
     private boolean cancelled;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="flight_details_id")
     private FlightDetails flightDetails;
 
