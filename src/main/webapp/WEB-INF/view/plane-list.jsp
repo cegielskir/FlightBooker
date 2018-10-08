@@ -57,6 +57,7 @@
                         <a href="${deleteLink}"
                            onclick="if (!(confirm('Are you sure you want to delete this plane?')))
                                    return false;">Delete</a>
+
                     </td>
                 </tr>
             </c:forEach>
@@ -67,6 +68,8 @@
     </div>
 </div>
 
+<br><br>
+<a href="/"> Back to main menu</a>
 
 
 </body>

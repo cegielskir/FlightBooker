@@ -68,6 +68,9 @@
         </div>
     </div>
 
+    <br><br>
+    <a href="/"> Back to main menu</a>
+
 
 
 </body>
