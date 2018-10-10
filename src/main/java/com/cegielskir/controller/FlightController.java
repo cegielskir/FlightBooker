@@ -63,6 +63,11 @@ public class FlightController {
             List<Airport> airports = airportService.getList();
             model.addAttribute("airports", airports);
             return "flight-form";
+        } else if (flight.getFromAirport().getId() == flight.getToAirport().getId()) {
+            model.addAttribute("error", "You have to choose different airports");
+            List<Airport> airports = airportService.getList();
+            model.addAttribute("airports", airports);
+            return "flight-form";
         } else {
             flightService.add(flight);
             return "redirect:/flight/list";

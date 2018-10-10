@@ -1,4 +1,5 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>
@@ -59,27 +60,37 @@
                     <td><form:errors path="arrivalDate" cssClass="error" /></td>
                 </tr>
 
-                <br>
+                <tr>
 
-                From Airport:
+                    <td> From Airport: </td>
 
-                <form:select  path="fromAirport">
+                <td>
+                    <form:select  path="fromAirport">
 
-                    <form:options items="${airports}"  itemValue="id"/>
+                        <form:options items="${airports}"  itemValue="id"/>
 
-                </form:select>
+                    </form:select>
+                </td>
+                <c:if test="${not empty error}">
+                    <td class="error"> ${error} </td>
+                </c:if>
 
-                <br>
-                <br>
+                </tr>
+                <tr>
 
-                To Airport:
+                    <td> To Airport: </td>
 
-                <form:select  path="toAirport">
+                    <td>
+                        <form:select  path="toAirport">
 
-                    <form:options items="${airports}"  itemValue="id"/>
+                            <form:options items="${airports}"  itemValue="id"/>
 
-                </form:select>
+                        </form:select>
+                    </td>
 
+                </tr>
+
+                <tr>
                     <td><label></label></td>
                     <td><input type="submit" value="Save" class="save" /></td>
                 </tr>

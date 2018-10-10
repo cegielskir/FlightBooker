@@ -18,6 +18,14 @@
 
     <a href="plane/list"> List of planes</a>
 
+    <br><br>
+
+    <a href="crewman/list"> List of crewmen</a>
+
+    <br><br>
+
+    <a href="address/list"> List of addresses</a>
+
 
     <hr>
 </body>

@@ -1,18 +1,13 @@
 package com.cegielskir.entity;
 
+import org.springframework.lang.Nullable;
+
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Table(name = "crewman")
 public class Crewman {
-
-    private static List<String> roles = new ArrayList<>(
-            Arrays.asList("Main Pilot", "Secondary Pilot", "Flight Attendant")
-    );
 
     //TODO form patterns and restrictions
 
@@ -20,7 +15,6 @@ public class Crewman {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
-
 
     @Column(name = "first_name")
     private String firstName;
@@ -38,21 +32,30 @@ public class Crewman {
     private String role;
 
     @ManyToOne
-    @JoinColumn(name = "address")
+    @JoinColumn(name = "address_id")
     private Address address;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "employment_date")
     private Date employmentDate;
 
+    @Nullable
     @Temporal(TemporalType.DATE)
     @Column(name = "dismissal_date")
     private Date dismissalDate;
 
-    public Crewman() {}
+    @Transient
+    private List<String> roles;
+
+    public Crewman() {
+        this.roles = new ArrayList<>();
+        this.roles.add("Main Pilot");
+        this.roles.add("Secondary Pilot");
+        this.roles.add("Flight Attendant");
+    }
 
     public Crewman(String firstName, String lastName, String email, String phoneNumber,
-                   String role, Address address, Date employmentDate, Date dismissalDate) {
+                   String role, Address address, Date employmentDate) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -60,16 +63,10 @@ public class Crewman {
         this.role = role;
         this.address = address;
         this.employmentDate = employmentDate;
-        this.dismissalDate = dismissalDate;
+        this.dismissalDate = null;
+
     }
 
-    public static List<String> getRoles() {
-        return roles;
-    }
-
-    public static void setRoles(List<String> roles) {
-        Crewman.roles = roles;
-    }
 
     public int getId() {
         return id;
@@ -141,6 +138,10 @@ public class Crewman {
 
     public void setDismissalDate(Date dismissalDate) {
         this.dismissalDate = dismissalDate;
+    }
+
+    public List<String> getRoles() {
+        return roles;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.cegielskir.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "flight_details")
@@ -21,6 +22,15 @@ public class FlightDetails {
 
     @Column
     private boolean cancelled;
+
+//    @ManyToMany(fetch = FetchType.LAZY,
+//            cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+//    @JoinTable(
+//            name="flight_details_crewman",
+//            joinColumns = @JoinColumn(name="flight_details_id"),
+//            inverseJoinColumns = @JoinColumn(name = "crewman_id")
+//    )
+//    private List<Crewman> crewmen;
 
     public FlightDetails() {}
 
@@ -61,6 +71,14 @@ public class FlightDetails {
     public void setFlight(Flight flight) {
         this.flight = flight;
     }
+
+//    public List<Crewman> getCrewmen() {
+//        return crewmen;
+//    }
+//
+//    public void setCrewmen(List<Crewman> crewmen) {
+//        this.crewmen = crewmen;
+//    }
 
     @Override
     public String toString() {
