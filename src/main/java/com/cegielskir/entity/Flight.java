@@ -59,6 +59,10 @@ public class Flight {
     @Column(name="cancelled")
     private boolean cancelled;
 
+    @OneToOne(mappedBy = "flight",
+            cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    private FlightDetails flightDetails;
+
 
     public Flight() {}
 
@@ -146,6 +150,13 @@ public class Flight {
         this.cancelled = cancelled;
     }
 
+    public FlightDetails getFlightDetails() {
+        return flightDetails;
+    }
+
+    public void setFlightDetails(FlightDetails flightDetails) {
+        this.flightDetails = flightDetails;
+    }
 
     @Override
     public String toString() {

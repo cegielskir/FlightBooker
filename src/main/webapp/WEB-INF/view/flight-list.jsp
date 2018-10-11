@@ -29,9 +29,7 @@
             <table>
                 <tr>
                     <th>Name</th>
-                    <th>Departure Time</th>
                     <th>Departure Date</th>
-                    <th>Arrival Time</th>
                     <th>Arrival Date</th>
                 </tr>
 
@@ -45,11 +43,11 @@
                     <c:url var="deleteLink" value="/flight/deleteFlight">
                         <c:param name="flightId" value="${tempFlight.id}" />
                     </c:url>
+
+
                     <tr>
                         <td> ${tempFlight.name} </td>
-                        <td> ${tempFlight.departureTime} </td>
                         <td> ${tempFlight.departureDate} </td>
-                        <td> ${tempFlight.arrivalTime} </td>
                         <td> ${tempFlight.arrivalDate} </td>
 
                         <td>
@@ -58,6 +56,14 @@
                             <a href="${deleteLink}"
                                onclick="if (!(confirm('Are you sure you want to delete this flight?')))
                                    return false;">Delete</a>
+                            |
+                            <c:if test="${tempFlight.flightDetails == null}">
+                                <a href='/flight/setDetails/${tempFlight.id}'>Set Details</a>
+                            </c:if>
+                            <c:if test="${tempFlight.flightDetails != null}">
+                                <a href='/flight/showDetails/${tempFlight.id}'>Show Details</a>
+                            </c:if>
+
                         </td>
                     </tr>
                 </c:forEach>

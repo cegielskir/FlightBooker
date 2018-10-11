@@ -1,17 +1,18 @@
 package com.cegielskir.controller;
 
-import com.cegielskir.entity.Airport;
-import com.cegielskir.entity.Flight;
+import com.cegielskir.entity.*;
 import com.cegielskir.propertyEditor.AirportEditor;
-import com.cegielskir.service.AirportService;
+import com.cegielskir.propertyEditor.CrewmanEditor;
+import com.cegielskir.propertyEditor.PlaneEditor;
+import com.cegielskir.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomCollectionEditor;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-import com.cegielskir.service.FlightService;
 
 import javax.validation.Valid;
 
@@ -31,6 +32,22 @@ public class FlightController {
 
     @Autowired
     AirportEditor airportEditor;
+
+    @Autowired
+    PlaneService planeService;
+
+    @Autowired
+    CrewmanService crewmanService;
+
+    @Autowired
+    FlightDetailsService flightDetailsService;
+
+    @Autowired
+    PlaneEditor planeEditor;
+
+    @Autowired
+    CrewmanEditor crewmanEditor;
+
 
     @GetMapping("/list")
     public String getFlights(Model model){
@@ -95,6 +112,44 @@ public class FlightController {
         return "redirect:/flight/list";
     }
 
+    @GetMapping("/setDetails/{flightId}")
+    public String setDetails(@PathVariable("flightId") int id, Model model){
+
+        Flight flight = flightService.getById(id);
+        List<Plane> planes = planeService.getList();
+        List<Crewman> crewmen = crewmanService.getList();
+        FlightDetails details = new FlightDetails();
+
+        model.addAttribute("flight", flight);
+        model.addAttribute("planes", planes);
+        model.addAttribute("crewmen", crewmen);
+        model.addAttribute("details", details);
+
+        return "details-form";
+
+    }
+
+    @PostMapping("/saveDetails/{flightId}")
+    public String saveDetails(@PathVariable("flightId") int id, @ModelAttribute("details") FlightDetails flightDetails,
+                            Model model){
+        Flight flight = flightService.getById(id);
+        flight.setFlightDetails(flightDetails);
+        flightService.add(flight);
+        return "redirect:/flight/list";
+    }
+
+    @GetMapping("/showDetails/{flightId}")
+    public String showDetails(@PathVariable("flightId") int id, Model model){
+        Flight flight = flightService.getById(id);
+        FlightDetails flightDetails = flight.getFlightDetails();
+        model.addAttribute("flight", flight);
+        model.addAttribute("flightDetails", flightDetails);
+
+        return "flight-details";
+    }
+
+
+
     @InitBinder
     public void initBinder(WebDataBinder binder){
         binder.registerCustomEditor(       Date.class, "departureDate",
@@ -106,6 +161,10 @@ public class FlightController {
         binder.registerCustomEditor(       Date.class,"arrivalTime",
                 new CustomDateEditor(new SimpleDateFormat("hh:mm"), false, 5));
         binder.registerCustomEditor(Airport.class, this.airportEditor);
+        binder.registerCustomEditor(Plane.class, this.planeEditor);
+        binder.registerCustomEditor(Crewman.class, this.crewmanEditor);
+        binder.registerCustomEditor(List.class, "crewmen", new ArrayToCollectionConverter){
+
     }
 
 

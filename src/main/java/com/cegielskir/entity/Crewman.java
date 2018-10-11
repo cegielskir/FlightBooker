@@ -44,6 +44,15 @@ public class Crewman {
     @Column(name = "dismissal_date")
     private Date dismissalDate;
 
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinTable(
+            name="flight_details_crewman",
+            joinColumns = @JoinColumn(name="crewman_id"),
+            inverseJoinColumns = @JoinColumn(name = "flight_details_id")
+    )
+    private List<FlightDetails> flightDetails;
+
     @Transient
     private List<String> roles;
 
@@ -144,11 +153,20 @@ public class Crewman {
         return roles;
     }
 
+    public List<FlightDetails> getFlightDetails() {
+        return flightDetails;
+    }
+
+    public void setFlightDetails(List<FlightDetails> flightDetails) {
+        this.flightDetails = flightDetails;
+    }
+
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
+    }
+
     @Override
     public String toString() {
-        return "Crewman: " +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", role='" + role + '\'';
+        return lastName + "  " + firstName;
     }
 }
