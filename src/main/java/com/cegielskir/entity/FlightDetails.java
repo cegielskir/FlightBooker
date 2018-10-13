@@ -1,6 +1,7 @@
 package com.cegielskir.entity;
 
 import javax.persistence.*;
+import java.util.Arrays;
 import java.util.List;
 
 @Entity
@@ -23,7 +24,7 @@ public class FlightDetails {
     @Column
     private boolean cancelled;
 
-    @ManyToMany(fetch = FetchType.LAZY,
+    @ManyToMany(fetch = FetchType.EAGER,
             cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(
             name="flight_details_crewman",
@@ -79,6 +80,7 @@ public class FlightDetails {
     public void setCrewmen(List<Crewman> crewmen) {
         this.crewmen = crewmen;
     }
+
 
     @Override
     public String toString() {

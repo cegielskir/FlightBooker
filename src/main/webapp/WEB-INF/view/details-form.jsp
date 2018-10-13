@@ -52,7 +52,7 @@
                         <%--</form:select>--%>
                         <%--</td>--%>
                     <tr><td> Crewmen: </td></tr>
-                    <tr><td><form:checkboxes element="li" items="${crewmen}" path="crewmen" /></td></tr>
+                    <tr><td><form:checkboxes element="li" items="${crewmen}" path="crewmen" itemValue="id"/></td></tr>
 
 
                 <tr>

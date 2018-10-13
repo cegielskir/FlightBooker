@@ -133,8 +133,11 @@ public class FlightController {
     public String saveDetails(@PathVariable("flightId") int id, @ModelAttribute("details") FlightDetails flightDetails,
                             Model model){
         Flight flight = flightService.getById(id);
+        flightDetails.setFlight(flight);
+        flightDetailsService.add(flightDetails);
         flight.setFlightDetails(flightDetails);
         flightService.add(flight);
+        System.out.println("| --> " +flight.getFlightDetails());
         return "redirect:/flight/list";
     }
 
@@ -163,7 +166,12 @@ public class FlightController {
         binder.registerCustomEditor(Airport.class, this.airportEditor);
         binder.registerCustomEditor(Plane.class, this.planeEditor);
         binder.registerCustomEditor(Crewman.class, this.crewmanEditor);
-        binder.registerCustomEditor(List.class, "crewmen", new ArrayToCollectionConverter){
+        binder.registerCustomEditor(List.class, "crewmen", new CustomCollectionEditor(List.class) {
+            @Override
+            protected Object convertElement(Object element){
+                    return crewmanService.getById(Integer.valueOf((String)element));
+            }
+        });
 
     }
 
