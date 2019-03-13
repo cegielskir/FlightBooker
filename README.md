@@ -1,0 +1,1 @@
+Spring MVC web application with database (Hibernate). It allows to perform CRUD operations on large database with many tables, types of relations and fields types. The database contains tables describing the structures of airlines and flight reservations.
